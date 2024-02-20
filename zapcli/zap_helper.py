@@ -122,7 +122,7 @@ class ZAPHelper(object):
     def is_running(self):
         """Check if ZAP is running."""
         try:
-            result = requests.get(self.proxy_url)
+            result = requests.get(self.proxy_url, timeout=60)
         except RequestException:
             return False
 
