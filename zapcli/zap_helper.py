@@ -11,13 +11,12 @@ import shlex
 import subprocess
 import time
 from six import binary_type
-
-import requests
 from requests.exceptions import RequestException
 from zapv2 import ZAPv2
 
 from zapcli.exceptions import ZAPError
 from zapcli.log import console
+from security import safe_requests
 
 
 class ZAPHelper(object):
@@ -122,7 +121,7 @@ class ZAPHelper(object):
     def is_running(self):
         """Check if ZAP is running."""
         try:
-            result = requests.get(self.proxy_url, timeout=60)
+            result = safe_requests.get(self.proxy_url, timeout=60)
         except RequestException:
             return False
 
