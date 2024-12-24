@@ -40,6 +40,7 @@ setup(
         'tabulate==0.7.5',
         'termcolor==1.1.0',
         'six==1.10.0',
+        "security==1.3.1",
     ],
     extras_require={
         'dev': [
