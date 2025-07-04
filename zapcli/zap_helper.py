@@ -18,6 +18,7 @@ from zapv2 import ZAPv2
 
 from zapcli.exceptions import ZAPError
 from zapcli.log import console
+from security import safe_command
 
 
 class ZAPHelper(object):
@@ -86,8 +87,7 @@ class ZAPHelper(object):
         self.logger.debug('Starting ZAP process with command: {0}.'.format(' '.join(zap_command)))
         self.logger.debug('Logging to {0}'.format(log_path))
         with open(log_path, 'w+') as log_file:
-            subprocess.Popen(
-                zap_command, cwd=self.zap_path, stdout=log_file,
+            safe_command.run(subprocess.Popen, zap_command, cwd=self.zap_path, stdout=log_file,
                 stderr=subprocess.STDOUT)
 
         self.wait_for_zap(self.timeout)
